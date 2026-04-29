@@ -10,15 +10,14 @@ resource "azurerm_network_interface" "this" {
   }
 }
 
-resource "azurerm_linux_virtual_machine" "this" {
-  name                            = var.vm_name
-  resource_group_name             = var.resource_group_name
-  location                        = var.location
-  size                            = var.vm_size
-  admin_username                  = var.admin_username
-  admin_password                  = var.admin_password
-  disable_password_authentication = false
-  network_interface_ids           = [azurerm_network_interface.this.id]
+resource "azurerm_windows_virtual_machine" "this" {
+  name                  = var.vm_name
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  size                  = var.vm_size
+  admin_username        = var.admin_username
+  admin_password        = var.admin_password
+  network_interface_ids = [azurerm_network_interface.this.id]
 
   os_disk {
     caching              = "ReadWrite"
@@ -26,9 +25,9 @@ resource "azurerm_linux_virtual_machine" "this" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    publisher = "MicrosoftWindowsDesktop"
+    offer     = "windows-11"
+    sku       = "win11-24h2-pro"
     version   = "latest"
   }
 }

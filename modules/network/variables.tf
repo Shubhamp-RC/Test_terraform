@@ -27,3 +27,13 @@ variable "subnet_address_prefixes" {
   description = "Address prefixes for the subnet"
   type        = list(string)
 }
+
+variable "bastion_subnet_address_prefix" {
+  description = "Address prefix for the AzureBastionSubnet (minimum /26)"
+  type        = string
+}
+
+variable "nsg_name" {
+  description = "Name of the network security group"
+  type        = string
+}
